@@ -19,7 +19,7 @@ validation tests. It contains only the functions needed for:
 - midpoint-onset reconstruction; and
 - post-trauma start-stop interval construction.
 
-### `custom_functions_top3_demo_v7.R`
+### `testing_run.R`
 
 Reviewer-facing simulation code that generates a synthetic cohort and exercises
 the three most custom analysis components:
