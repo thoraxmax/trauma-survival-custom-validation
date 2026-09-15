@@ -43,9 +43,6 @@
 # 11. Prespecified 6-month proximal-risk-by-sex interaction sensitivity models.
 # SM: Start-stop pooled Cox interaction with clustered SE; SP: survival::coxph; IV/DV: within-cutoff x female / OCD; MF: Surv(...) ~ within_cutoff + within_cutoff_x_female + age_at_trauma + strata(sex) + cluster(record_id); M: test whether 6-month proximal risk differs by sex.
 
-#Skip the trauma count in this model
-#also start by using new ligetime worst trama as a binday predictor  then  do the adjusted time moidel
-#also repropt in the apa summary how many got new worst taurma
 # 12. Time-updated new lifetime-worst-trauma model.
 # SM: Start-stop time-varying Cox with participant-clustered robust SE; SP: survival::coxph; IV/DV: new-worst-trauma time-varying indicator / OCD; MF: Surv(start, stop, event) ~ new_worst_trauma_tv [+ trauma_type_count] + sex handling + cluster(record_id); M: preserve exposure timing and avoid immortal-time bias.
 # Standard PH tests are not applied to the explicitly time-varying cutoff models.
