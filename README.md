@@ -1,41 +1,74 @@
-# TRAUMA Survival Analysis — Custom Functions & Validation
+# Trauma Survival Analysis
 
-This repository contains the custom R survival-analysis functions and standalone
-simulation-based validation code accompanying the TRAUMA analyses.
+This repository contains the R code used for the survival analyses in the associated manuscript, together with a synthetic validation framework for the custom survival-analysis functions.
 
-The repository is intended to support reproducibility and transparency of the
-custom statistical procedures used in the study. It does not contain the full
-study analysis scripts or participant-level study data.
+Participant-level study data are not included.
 
-## Contents
+## Analysis code
 
-### `custom_functions_test_only.R`
+The complete analysis code is in the `analysis/` folder:
 
-A minimal version of the custom survival-analysis functions required for the
-validation tests. It contains only the functions needed for:
+```text
+analysis/
+├── custom_functions.R
+├── 01_RQ1_incidence.R
+├── 02_RQ2_time_to_onset.R
+├── 03_RQ3_risk_factors.R
+└── 04_sensitivity_analyses.R
+```
 
-- delayed-entry Kaplan-Meier estimation and RMST;
-- participant-level bootstrap estimation and percentile confidence intervals;
-- midpoint-onset reconstruction; and
-- post-trauma start-stop interval construction.
+The scripts cover:
 
-### `testing_run.R`
+* incidence and cumulative-risk analyses;
+* time-to-onset analyses;
+* delayed-entry Cox models;
+* proportional-hazards diagnostics;
+* trauma-type and trauma-count models;
+* demographic and age-at-trauma models; and
+* prespecified sensitivity analyses.
 
-Reviewer-facing simulation code that generates a synthetic cohort and exercises
-the three most custom analysis components:
+Run the scripts in this order:
 
-1. delayed-entry KM/RMST and participant bootstrap;
-2. midpoint-onset reconstruction; and
-3. post-trauma start-stop Cox analysis.
+```text
+01_RQ1_incidence.R
+02_RQ2_time_to_onset.R
+03_RQ3_risk_factors.R
+04_sensitivity_analyses.R
+```
 
-The script includes numerical and structural validation checks and reports a
-clear pass/fail status.
+RQ2 should be run before RQ3 and the sensitivity analyses because it generates the sex-handling decision used by downstream Cox models.
+
+## Input data
+
+The analysis scripts expect a prepared dataset named:
+
+```text
+cox_survival_dataset_full.csv
+```
+
+Alternatively, the input path can be specified using:
+
+```r
+Sys.setenv(SURVIVAL_DATA_PATH = "/path/to/cox_survival_dataset_full.csv")
+```
+
+The participant-level dataset is not publicly distributed because of data-governance and confidentiality requirements.
 
 ## Requirements
 
-R 4.6.0 or later.
+The main analyses require R and the `survival` package.
 
-Required package:
+Optional packages used for formatted Word output are:
 
-```r
-install.packages("survival")
+```text
+officer
+flextable
+```
+
+## Validation
+
+`testing_run.R` and `custom_functions_minimal.R` provide a synthetic-data validation framework for key custom survival-analysis procedures without using study data.
+
+## Reproducibility
+
+The repository provides the complete statistical analysis code required to reproduce the analyses when access to the prepared study dataset is available.
