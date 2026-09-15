@@ -1,8 +1,8 @@
-# Reviewer-facing demonstration of the three most custom survival analyses.
-# Requires custom_functions.R in the same directory.
+# Demonstration of the three most custom survival analyses.
+# Requires custom_functions_minimal.R in the same directory.
 
 suppressPackageStartupMessages(library(survival))
-source("custom_functions.R")
+source("custom_functions_minimal.R")
 
 stopifnot(exists("km_fit", mode = "function"))
 stopifnot(exists("rmst_from_fit", mode = "function"))
